@@ -62,7 +62,7 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 ## Description of the modified approach
 ### Modification of Script:
 
-The [EventsTable_Stratified](EventsTablee_stratified.ipynb) notebook is modified to create [CN_hyetographs_updated](CN_hyetographs_updated.ipynb) notebook. The approach used while modifying the script to fit the project's requirement are explained below.
+The [EventsTable_Stratified](EventsTable_Stratified.ipynb) notebook is modified to create [CN_hyetographs_updated](CN_hyetographs_updated.ipynb) notebook. The approach used while modifying the script to fit the project's requirement are explained below.
 
 - The rainfall is developed using Hydrology 2. And the rainfall hyetographs are developed using the NOAA Atlas 14 temporal distributions (four different quartiles).
 
@@ -73,7 +73,7 @@ The conversion is done using the formula: S = 1000/CN - 10
 
 - These CN values for wet and dry conditions are then provided as an input to the HEC-RAS model. This way the RAS model acccounts for the spatial variability of the losses associated with different land use conditions throughout the basin.
 
-- All the other calculation steps are same as described in the original [EventsTable_Stratified](EventsTablee_stratified.ipynb) script.
+- All the other calculation steps are same as described in the original [EventsTable_Stratified](EventsTable_Stratified.ipynb) script.
 
 ### CN calculation approach
 - Steps involved:
