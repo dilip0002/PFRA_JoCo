@@ -42,20 +42,20 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 2. Run [Hydro4_samples](Hydro4_sample.ipynb) which prepares the shape of the 4 sampled NOAA Atlas 14 temporal hyetographs.
 
 3. Run [CN_hyetographs_updated](CN_hyetographs_updated.ipynb) in order to calculate the rainfall hyetographs for all the events (return intervals), and the curve number (CN) values for wet and dry condition for all the events.
-       ```
-      Inputs:
-        1. PrecipTable.xlsx from step 1, which contains precipitation frequency tables and the NOAA Atlas 14 volume and region number. Note that the volume and region number may also be entered manually.
-        2. 4 sampled NOAA Atlas 14 temporal hyetographs from step 2
-        3. Shapefile containing the CN values for the study area
-        4. Storm durations
-        5. Filenames and paths for outputs
-        6. EventsTable.ipynb
-
-      Outputs:
-        1. Rainfall hyetographs for each event
-        2. Event weights
-        3. CN values for wet and dry conditions for each event
-    ```
+     ```
+        Inputs:
+          1. PrecipTable.xlsx from step 1, which contains precipitation frequency tables and the NOAA Atlas 14 volume and region number. Note that the volume and region number may also be entered manually.
+          2. 4 sampled NOAA Atlas 14 temporal hyetographs from step 2
+          3. Shapefile containing the CN values for the study area
+          4. Storm durations
+          5. Filenames and paths for outputs
+          6. EventsTable.ipynb
+  
+        Outputs:
+          1. Rainfall hyetographs for each event
+          2. Event weights
+          3. CN values for wet and dry conditions for each event
+      ```
 
 
 
