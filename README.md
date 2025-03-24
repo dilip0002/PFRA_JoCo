@@ -1,4 +1,5 @@
-# [pfra-hydromet](https://dewberry.github.io/pfra-hydromet/)
+# PFRA - Johnson County, KS 
+The PFRA approach used for Johnson County, KS utilizes the approach that was developed in [pfra-hydromet](https://dewberry.github.io/pfra-hydromet/)
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Dewberry/pfra-hydromet/master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -7,7 +8,7 @@
 
 # Description
 
-__pfra-hydromet__ is a collection of tools for developing __pluvial__ (excess rainfall) and __fluvial__ scenarios for input to hydraulic models.
+This project utilizes the scripts developed by __pfra-hydromet__. This project uses tools for developing __pluvial__ (excess rainfall) scenarios for input to hydraulic models.
 
 ### Pluvial:
 These tools ([jupyter notebooks](https://jupyter.org/) ) ingest data from the NOAA Hydrometeorological Design Studies Center ([HDSC](https://www.nws.noaa.gov/oh/hdsc/index.html)) and return unique, weighted excess rainfall events suitable for use in 2D hydraulic *rain-on-grid* models. This approach relies on:
@@ -15,57 +16,28 @@ These tools ([jupyter notebooks](https://jupyter.org/) ) ingest data from the NO
   1. Meteorological data
   2. Random sampling
   3. Hydrologic transform
-  4. Convolution algorithm for grouping
-
-
-
-### Fluvial:
-
-These jupyter notebooks ingest [HEC-SSP](https://www.hec.usace.army.mil/software/hec-ssp/) .rpt files containing flow frequency data for a specific USGS Stream Gage calculated at a range of confidence limits and return a series of events, statified by the annual exceedance probability, with discharge based on the mean flow frequency curve. This approach relies on:
-   1. [Bulletin 17C](https://pubs.usgs.gov/tm/04/b05/tm4b5.pdf) flow frequency analysis
-   2. Mean flow frequency curve
-   3. Stratified sampling
    
-
-
-__NOTE__: [EventsTable](EventsTable.ipynb) is the primary notebook for developing excess precipitation scenarios, and [SSP_to_Mean_Curve](SSP_to_Mean_Curve.ipynb) is the primary notebook for calculating the mean flow frequency curve. Both of these notebooks can be called by [*Papermill*](https://pypi.org/project/papermill/), where papermill is designed to act as a *manager* to maintain consistency in computation, and ensure cells are executed in order. *Manager* notebooks are designated with the `PM-` prefix. Executed notebooks should be saved as documentation of the inputs, outputs, and results for a given project location.
 
 ---
 
 ## Contents
 
-#### __notebooks__:
+### __notebooks__:
 
-##### __pluvial__:
+#### __pluvial__:
+The notebooks that are used for this PFRA - Johnson County, KS project are explained below. These are the only notebooks that are used in preparing the input data required for probabilistic modeling.
 
 - [__PrecipTable__](PrecipTable.ipynb): Retrieve NOAA Atlas 14 precipitation statisics for an Area of Interest (AOI).
 
-- [__PM-EventsTable__](PM-EventsTable.ipynb): Manager notebook that executes `EventsTable` and/or `reEventsTable`.
+- [__Hydro4_samples__](Hydro4_samples.ipynb): Prepares the shape of the 4 sampled Atlas 14 nested hyetographs.
 
-- [__EventsTable__](EventsTable.ipynb): Calculates excess rainfall using area-averaged NOAA Atlas 14 precipitation data, temporal distributions, the curve number (CN)* transform, and a convolution reduction algorithm (grouping). The output is a set of unique, weighted excess rainfall time series.
+- [__CN_hyetographs_updated__](CN_hyetographs_updated.ipynb): Creates a stratified sample of rainfall hyetographs given rainfall and maximum potential retention distributions. For each event and corresponding return interval, the event weight, CN values for wet and dry conditions, and rainfall values are calculated. This script is developed by modifying the EventsTable_Stratified notebook to produce the desirable outputs. The detailed workflow for this approach is described in the "Readme" file located under the "notebooks/pluvial" folder.
 
-- [__EventsTable_Stratified__](EventsTable_Stratified.ipynb): Calculates a stratified sample of runoff events given rainfall and maximum potential retention distributions. For each each event and corresponding return interval, the event weight, runoff value, maximum potential retention value, and rainfall value are calculated.
+- [__EventsTable_Stratified__](EventsTable_Stratified.ipynb): Calculates a stratified sample of runoff events given rainfall and maximum potential retention distributions. For each each event and corresponding return interval, the event weight, runoff value, maximum potential retention value, and rainfall value are calculated. This (EventsTable_Stratified) notebook is the reference notebook that is used to create CN_hyetographs_updated notebook.
 
-- [__reEventsTable__](reEventsTable.ipynb): Calculates the reduced excess rainfall given a user-specified stormwater removal rate and capacity. Given user-specified contributing areas (stormsheds), the lateral inflow hydrograhs are also calculated for each event.
 
-- [__distalEventsTable__](distalEventsTable.ipynb): Calculates excess rainfall using updated randomized curve numbers and the original precipitation events calculated in `EventsTable.ipynb`. The events are combined using the groups determined during the convolution steps in `EventsTable.ipynb`. The `reEventsTable` notebook can be then be executed in order to calculate the reduced excess rainfall.
 
-- [__JSON_to_DSS__](JSON_to_DSS.ipynb): Converts the JSON files generated by `PM-EventsTable` and/or `distalEventsTable` to a single DSS.
 
-- [__MetadataExplorer__](MetadataExplorer.ipynb): Explores the metadata file created by `PM-EventsTable` or `distalEventsTable` during the excess rainfall calculations.
-
-- [__Convolution_Parameters__](Convolution_Parameters.ipynb): Describes the test statistic and parameters used during the convolution step in the `EventsTable` notebook.
-
-- `ProjectArea_ModelName_Pluvial_Parameters.xlsx `: Excel Workbook used to store the CN, stormwater removal rate and capacity, and information on lateral inflow domains for each pluvial domain within a pluvial model. This Workbook is called by `EventsTable`, `PM-EventsTable`, `distalEventsTable`, and `reEventsTable`.
-
-##### __fluvial__:
-- [__PM_Sampler_Ops__](PM_Sampler_Ops.ipynb):  Manager notebook that executes `SSP_to_Mean_Curve`, `Stratified_Sampler`, and `Make_Production_Run_List`.
-
-- [__SSP_to_Mean_Curve__](SSP_to_Mean_Curve.ipynb): Calculates the mean flow frequency curve using [Bulletin 17C](https://pubs.usgs.gov/tm/04/b05/tm4b5.pdf) confidence limits calculated in [HEC-SSP](https://www.hec.usace.army.mil/software/hec-ssp/).
-
-- [__Stratified_Sampler__](Stratified_Sampler.ipynb): Calculates the weight of a specified number of annual exceedance probabilities/recurrence intervals uniformly selected between the minimum and maximum value within log space.
-
-- [__Make_Production_Run_List__](Make_Production_Run_List.ipynb): Calculates the discharge for each annual exceedance probability (AEP) within the weights table using the mean flow frequency curve.
 
 #### __DataRepository__:
 
@@ -90,4 +62,4 @@ __NOTE__: [EventsTable](EventsTable.ipynb) is the primary notebook for developin
 
 ### Documentation
 
-Complete project documentation can be found in [read the docs](https://dewberry.github.io/pfra-hydromet/about/).
+This project utilizes the scripts developed by PFRA-hydromet. The complete documentation for PFRA-hydromet can be found in [read the docs](https://dewberry.github.io/pfra-hydromet/about/).
