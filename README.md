@@ -1,5 +1,5 @@
 # PFRA - Johnson County, KS 
-The PFRA approach used for Johnson County, KS utilizes the approach that was developed in [pfra-hydromet](https://dewberry.github.io/pfra-hydromet/)
+The PFRA approach used for Johnson County, KS utilizes the approach that was developed in [pfra-hydromet](https://dewberry.github.io/pfra-hydromet/). There are some modifications made to fit the project's requirements which are documented below.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Dewberry/pfra-hydromet/master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -27,13 +27,13 @@ These tools ([jupyter notebooks](https://jupyter.org/) ) ingest data from the NO
 #### __pluvial__:
 The notebooks that are used for this PFRA - Johnson County, KS project are explained below. These are the only notebooks that are used in preparing the input data required for probabilistic modeling.
 
-- [__PrecipTable__](PrecipTable.ipynb): Retrieve NOAA Atlas 14 precipitation statisics for an Area of Interest (AOI).
+- [__PrecipTable__](notebooks/pluvial/PrecipTable.ipynb): Retrieve NOAA Atlas 14 precipitation statisics for an Area of Interest (AOI).
 
-- [__Hydro4_samples__](Hydro4_samples.ipynb): Prepares the shape of the 4 sampled Atlas 14 nested hyetographs.
+- [__Hydro4_samples__](notebooks/pluvial/Hydro4_samples.ipynb): Prepares the shape of the 4 sampled Atlas 14 nested hyetographs.
 
-- [__CN_hyetographs_updated__](CN_hyetographs_updated.ipynb): Creates a stratified sample of rainfall hyetographs given rainfall and maximum potential retention distributions. For each event and corresponding return interval, the event weight, CN values for wet and dry conditions, and rainfall values are calculated. This script is developed by modifying the EventsTable_Stratified notebook to produce the desirable outputs. The detailed workflow for this approach is described in the "Readme" file located under the "notebooks/pluvial" folder.
+- [__CN_hyetographs_updated__](notebooks/pluvial/CN_hyetographs_updated.ipynb): Creates a stratified sample of rainfall hyetographs given rainfall and maximum potential retention distributions. For each event and corresponding return interval, the event weight, CN values for wet and dry conditions, and rainfall values are calculated. This script is developed by modifying the [__EventsTable_Stratified__](notebooks/pluvial/EventsTable_Stratified.ipynb) notebook to produce the project specific desirable outputs. The detailed workflow for this approach is described below.
 
-- [__EventsTable_Stratified__](EventsTable_Stratified.ipynb): Calculates a stratified sample of runoff events given rainfall and maximum potential retention distributions. For each each event and corresponding return interval, the event weight, runoff value, maximum potential retention value, and rainfall value are calculated. This (EventsTable_Stratified) notebook is the reference notebook that is used to create CN_hyetographs_updated notebook.
+- [__EventsTable_Stratified__](notebooks/pluvial/EventsTable_Stratified.ipynb): Calculates a stratified sample of runoff events given rainfall and maximum potential retention distributions. For each each event and corresponding return interval, the event weight, runoff value, maximum potential retention value, and rainfall value are calculated. This (EventsTable_Stratified) notebook is the reference notebook that is used to create CN_hyetographs_updated notebook.
 
 
 
@@ -59,10 +59,10 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 *The ([CN Method](https://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1044171.pdf)) is currently the only transform method in use for this project. Other transforms are available and can be adopted into the tool with minor modifications.
 
 
-
+---
 ## Workflow
 
-1. Run [PrecipTable](PrecipTable.ipynb) in order to calculate the area-averaged precipitation frequency table for the specified durations as well as to determine the NOAA Atlas 14 volume and region.
+1. Run [PrecipTable](notebooks/pluvial/PrecipTable.ipynb) in order to calculate the area-averaged precipitation frequency table for the specified durations as well as to determine the NOAA Atlas 14 volume and region.
     ```
       Inputs:
         1. A vector polygon of the area of interest, i.e. the pluvial domain.
@@ -73,9 +73,9 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
         1. A spreadsheet with the area-averaged precipitation frequency table for each duration, along with the NOAA Atlas 14 volume and region numbers.
     ```
     
-2. Run [Hydro4_samples](Hydro4_sample.ipynb) which prepares the shape of the 4 sampled NOAA Atlas 14 temporal hyetographs.
+2. Run [Hydro4_samples](notebooks/pluvial/Hydro4_sample.ipynb) which prepares the shape of the 4 sampled NOAA Atlas 14 temporal hyetographs.
 
-3. Run [CN_hyetographs_updated](CN_hyetographs_updated.ipynb) in order to calculate the rainfall hyetographs for all the events (return intervals), and the curve number (CN) values for wet and dry condition for all the events.
+3. Run [CN_hyetographs_updated](notebooks/pluvial/CN_hyetographs_updated.ipynb) in order to calculate the rainfall hyetographs for all the events (return intervals), and the curve number (CN) values for wet and dry condition for all the events.
      ```
         Inputs:
           1. PrecipTable.xlsx from step 1, which contains precipitation frequency tables and the NOAA Atlas 14 volume and region number. Note that the volume and region number may also be entered manually.
@@ -95,4 +95,5 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 
 ### Documentation
 
-This project utilizes the scripts developed by PFRA-hydromet. The complete documentation for PFRA-hydromet can be found in [read the docs](https://dewberry.github.io/pfra-hydromet/about/).
+This project utilizes the scripts developed by PFRA-hydromet. There are some modifications made based on the project's requirements. 
+The complete documentation for PFRA-hydromet can be found in [read the docs](https://dewberry.github.io/pfra-hydromet/about/).
