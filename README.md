@@ -58,6 +58,39 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 
 *The ([CN Method](https://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1044171.pdf)) is currently the only transform method in use for this project. Other transforms are available and can be adopted into the tool with minor modifications.
 
+
+
+## Workflow
+
+1. Run [PrecipTable](PrecipTable.ipynb) in order to calculate the area-averaged precipitation frequency table for the specified durations as well as to determine the NOAA Atlas 14 volume and region.
+    ```
+      Inputs:
+        1. A vector polygon of the area of interest, i.e. the pluvial domain.
+        2. Optional/as needed: 
+            - Precipitation event durations; the duration used in this project is 12 hour.
+            - The polygon's projection as a string if it cannot be determined automatically.
+      Outputs:
+        1. A spreadsheet with the area-averaged precipitation frequency table for each duration, along with the NOAA Atlas 14 volume and region numbers.
+    ```
+    
+2. Run [Hydro4_samples](Hydro4_sample.ipynb) which prepares the shape of the 4 sampled NOAA Atlas 14 temporal hyetographs.
+
+3. Run [CN_hyetographs_updated](CN_hyetographs_updated.ipynb) in order to calculate the rainfall hyetographs for all the events (return intervals), and the curve number (CN) values for wet and dry condition for all the events.
+     ```
+        Inputs:
+          1. PrecipTable.xlsx from step 1, which contains precipitation frequency tables and the NOAA Atlas 14 volume and region number. Note that the volume and region number may also be entered manually.
+          2. 4 sampled NOAA Atlas 14 temporal hyetographs from step 2
+          3. Shapefile containing the CN values for the study area
+          4. Storm durations
+          5. Filenames and paths for outputs
+          6. EventsTable.ipynb
+  
+        Outputs:
+          1. Rainfall hyetographs for each event
+          2. Event weights
+          3. CN values for wet and dry conditions for each event
+      ```
+
 ---
 
 ### Documentation
