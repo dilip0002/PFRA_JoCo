@@ -16,7 +16,7 @@ The notebooks that are used for this PFRA - Johnson County, KS project are expla
 
 - [__Hydro4_samples__](Hydro4_samples.ipynb): Prepares the shape of the 4 sampled Atlas 14 nested hyetographs.
 
-- [__CN_hyetographs_updated__](CN_hyetographs_updated.ipynb): Creates a stratified sample of rainfall hyetographs given rainfall and maximum potential retention distributions. For each event and corresponding return interval, the event weight, CN values for wet and dry conditions, and rainfall values are calculated. This script is developed by modifying the EventsTable_Stratified notebook to produce the desirable outputs. The detailed workflow for this approach is described in the "Readme" file located under the "notebooks/pluvial" folder.
+- [__CN_hyetographs_updated__](CN_hyetographs_updated.ipynb): Creates a stratified sample of rainfall hyetographs given rainfall and maximum potential retention distributions. For each event and corresponding return interval, the event weight, CN values for wet and dry conditions, and rainfall values are calculated. This script is developed by modifying the [__EventsTable_Stratified__](EventsTable_Stratified.ipynb) notebook to produce the desirable outputs. The detailed workflow for this approach is described in the "Readme" file located under the "notebooks/pluvial" folder.
 
 - [__EventsTable_Stratified__](EventsTable_Stratified.ipynb): Calculates a stratified sample of runoff events given rainfall and maximum potential retention distributions. For each each event and corresponding return interval, the event weight, runoff value, maximum potential retention value, and rainfall value are calculated. This (EventsTable_Stratified) notebook is the reference notebook that is used to create CN_hyetographs_updated notebook.
 
